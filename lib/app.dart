@@ -19,7 +19,7 @@ class _AppState extends State<App> {
       routes: {
         '/': (context) => const Dashboard(),
         '/addRoute': (context) => const AddStudent(),
-        '/displayRoute': (context) => const DisplayStudent(),
+        '/displayRoute': (context) => const OutputView(),
       },
     );
   }

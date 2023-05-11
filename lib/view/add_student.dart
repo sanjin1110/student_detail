@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-enum Gender { male, female }
+import '../model/student.dart';
+
+// enum Gender { male, female }
 
 class AddStudent extends StatefulWidget {
   const AddStudent({super.key});
@@ -10,15 +12,18 @@ class AddStudent extends StatefulWidget {
 }
 
 class _AddStudentState extends State<AddStudent> {
-  Gender selectedGender = Gender.male;
-  String? _selectedOption;
+  // Gender selectedGender = Gender.male;
+  String? selectedCity;
+  String? gender;
 
-  final List<String> _options = [
-    'KTM',
-    'BKT',
-    'LTP',
-    'GRK',
+  final List<String> cities = [
+    "Kathmandu",
+    "Lalitpur",
+    "Bhaktapur",
+    "Pokhara",
   ];
+    List<Student> lstStudent = [];
+
   final fnameController = TextEditingController();
   final lnameController = TextEditingController();
   final ageController = TextEditingController();
@@ -87,30 +92,60 @@ class _AddStudentState extends State<AddStudent> {
                 ),
                 gap,
                 const Text('Select Gender'),
-                ListTile(
-                  title: const Text('Male'),
-                  leading: Radio(
-                    value: Gender.male,
-                    groupValue: selectedGender,
-                    onChanged: (Gender? value) {
-                      setState(() {
-                        selectedGender = value!;
-                      });
-                    },
-                  ),
-                ),
-                ListTile(
+                RadioListTile(
                   title: const Text('Female'),
-                  leading: Radio(
-                    value: Gender.female,
-                    groupValue: selectedGender,
-                    onChanged: (Gender? value) {
-                      setState(() {
-                        selectedGender = value!;
-                      });
-                    },
-                  ),
+                  value: 'Female',
+                  groupValue: gender,
+                  onChanged: (value) {
+                    setState(() {
+                      gender = value;
+                    });
+                  },
                 ),
+                RadioListTile(
+                  title: const Text('Others'),
+                  value: 'Others',
+                  groupValue: gender,
+                  onChanged: (value) {
+                    setState(() {
+                      gender = value;
+                    });
+                  },
+                ),
+                RadioListTile(
+                  title: const Text('Others'),
+                  value: 'Others',
+                  groupValue: gender,
+                  onChanged: (value) {
+                    setState(() {
+                      gender = value;
+                    });
+                  },
+                ),
+                // ListTile(
+                //   title: const Text('Male'),
+                //   leading: Radio(
+                //     value: Gender.male,
+                //     groupValue: selectedGender,
+                //     onChanged: (Gender? value) {
+                //       setState(() {
+                //         selectedGender = value!;
+                //       });
+                //     },
+                //   ),
+                // ),
+                // ListTile(
+                //   title: const Text('Female'),
+                //   leading: Radio(
+                //     value: Gender.female,
+                //     groupValue: selectedGender,
+                //     onChanged: (Gender? value) {
+                //       setState(() {
+                //         selectedGender = value!;
+                //       });
+                //     },
+                //   ),
+                // ),
                 TextFormField(
                   minLines: 5, // Set the minimum number of lines to 5
                   maxLines: null,
@@ -128,16 +163,16 @@ class _AddStudentState extends State<AddStudent> {
                 ),
                 gap,
                 DropdownButtonFormField<String>(
-                  value: _selectedOption,
-                  items: _options.map((String option) {
+                  value: selectedCity,
+                  items: cities.map((String option) {
                     return DropdownMenuItem<String>(
                       value: option,
                       child: Text(option),
                     );
                   }).toList(),
-                  onChanged: (String? newValue) {
+                  onChanged: ( newValue) {
                     setState(() {
-                      _selectedOption = newValue;
+                      selectedCity = newValue;
                     });
                   },
                   decoration: const InputDecoration(
